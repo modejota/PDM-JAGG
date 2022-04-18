@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/allSongsAdd"
+        android:icon="@drawable/ic_baseline_add"
+        android:title="Add selected songs"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/allSongsDelete"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_delete"
+        android:title="Delete selected songs" />
+
+</menu>
