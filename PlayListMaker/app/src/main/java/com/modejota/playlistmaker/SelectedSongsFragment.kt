@@ -56,14 +56,18 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             if (selectedSongs.isNotEmpty()) {
                 PlaylistTitleDialog(onSubmitClickListener = { title ->
                     if (title.isBlank()) {
-                        Toast.makeText(context, "Please enter a title", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.please_enter_title), Toast.LENGTH_SHORT).show()
                     } else {
-                        Utilities.createFilePublic(title, selectedSongsFromAdapter)
-                        Toast.makeText(context, "Playlist saved", Toast.LENGTH_SHORT).show()
+                        try {
+                            Utilities.createFilePublic(title, selectedSongsFromAdapter)
+                            Toast.makeText(context, getString(R.string.playlist_saved), Toast.LENGTH_SHORT).show()
+                        } catch (e: Exception) {
+                            Toast.makeText(context, getString(R.string.error_saving_playlist), Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }).show(childFragmentManager, "PlaylistTitleDialog")
             } else {
-                Toast.makeText(context, "No songs selected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.no_songs_selected), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -121,9 +125,9 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
     private fun confirmDelete() {
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Delete songs")
-        alertDialog.setMessage("Are you sure you want to delete this songs?")
-        alertDialog.setPositiveButton("Yes") { _, _ ->
+        alertDialog.setTitle(getString(R.string.delete_songs_title))
+        alertDialog.setMessage(getString(R.string.delete_songs_message))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
             val adapter = binding.rvSelectedSongs.adapter as SongAdapter
             selectedIndexes.forEach {
                 val index = adapter.getSongList().indexOfFirst { song -> song.ID == it }
@@ -132,7 +136,7 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             selectedIndexes.clear()
             showActionMenu(false)
         }
-        alertDialog.setNegativeButton("No") { _, _ -> }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
     }
 

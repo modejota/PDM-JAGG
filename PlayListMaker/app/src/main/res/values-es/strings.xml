@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Playlist Maker</string>
+    <string name="add_songs_title">Añadir canciones</string>
+    <string name="add_songs_message">¿Desea añadir las canciones seleccionadas?</string>
+    <string name="delete_songs_title">Eliminar canciones</string>
+    <string name="delete_songs_message">¿Desea eliminar las canciones seleccionadas?</string>
+    <string name="affirmative">Sí</string>
+    <string name="negative">No</string>
+    <string name="please_enter_title">Por favor, introduzca un título</string>
+    <string name="playlist_saved">Playlist guardada</string>
+    <string name="error_saving_playlist">Error guardando playlist</string>
+    <string name="no_songs_selected">No hay canciones seleccionadas</string>
+    <string name="unknown_artist">Artista desconocido</string>
+    <string name="create_playlist">Crear playlist</string>
+    <string name="name">Nombre</string>
+    <string name="insert_playlist_name">Introduzca nombre de la playlist</string>
+    <string name="dialog_confirm">Confirmar</string>
+    <string name="confirm_playlist">Confirmar playlist</string>
+    <string name="song_album_mini_image">Imagen del álbum de la canción</string>
+    <string name="selected_tick">Tick de selección</string>
+    <plurals name="playlist_size">
+        <item quantity="one">%d canción</item>
+        <item quantity="other">%d canciones</item>
+    </plurals>
+</resources>
