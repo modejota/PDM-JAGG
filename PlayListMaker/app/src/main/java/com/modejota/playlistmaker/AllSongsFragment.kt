@@ -3,6 +3,7 @@ package com.modejota.playlistmaker
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modejota.playlistmaker.databinding.FragmentAllSongsBinding
@@ -85,7 +86,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
                 selectedIndexes.clear()
                 showActionMenu(false)
             }
-
+            Toast.makeText(context, getString(R.string.confirm_songs_added), Toast.LENGTH_SHORT).show()
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
@@ -103,6 +104,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
             }
             selectedIndexes.clear()
             showActionMenu(false)
+            Toast.makeText(context, getString(R.string.confirm_songs_deleted), Toast.LENGTH_SHORT).show()
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()

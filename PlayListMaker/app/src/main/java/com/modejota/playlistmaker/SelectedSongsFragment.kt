@@ -134,6 +134,7 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             }
             selectedIndexes.clear()
             showActionMenu(false)
+            Toast.makeText(context, getString(R.string.confirm_songs_deleted), Toast.LENGTH_SHORT).show()
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
