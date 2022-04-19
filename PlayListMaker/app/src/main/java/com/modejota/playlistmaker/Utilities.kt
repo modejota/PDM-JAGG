@@ -125,6 +125,13 @@ object Utilities {
         return songList
     }
 
+    fun deletePlaylistFileFromStorage(path: String) {
+        val file = File(path)
+        if (file.exists()) {
+            file.delete()
+        }
+    }
+
     private fun countSongs(file: File): Int {
         var count = 0
         file.forEachLine { if (it.startsWith("#EXTINF")) { count++ } }
