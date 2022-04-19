@@ -1,5 +1,7 @@
 package com.modejota.playlistmaker
 
+import android.net.Uri
+
 data class Song(val ID: Long,
                 val path: String,
                 val title: String,

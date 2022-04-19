@@ -2,6 +2,7 @@ package com.modejota.playlistmaker
 
 import android.content.ContentUris
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -32,6 +33,7 @@ object Utilities {
             MediaStore.Audio.Media.ALBUM,
             MediaStore.Audio.Media.ALBUM_ID,
             MediaStore.Audio.Media.DURATION,
+            MediaStore.Audio.Media.DATA,
         )
         val selection = "${MediaStore.Audio.Media.DURATION} >= ?"
         val selectionArgs = arrayOf(
@@ -47,6 +49,7 @@ object Utilities {
             val albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)
             val albumIdColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)
             val durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
+            val data = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
 
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
@@ -54,12 +57,12 @@ object Utilities {
                 var artist = cursor.getString(artistColumn)
                 val album = cursor.getString(albumColumn)
                 val albumId = cursor.getLong(albumIdColumn)
-                val contentUri: String = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id).path!!
+                val path = cursor.getString(data)
                 val duration = cursor.getLong(durationColumn)
                 if (artist == "<unknown>") {
                     artist = context.resources.getString(R.string.unknown_artist)
                 }
-                musicList += Song(id, contentUri, name, artist, album, albumId, duration)
+                musicList += Song(id, path, name, artist, album, albumId, duration)
             }
         }
         musicList.sortBy { it.title }
@@ -70,7 +73,7 @@ object Utilities {
         val musicFolder = File(Environment.getExternalStorageDirectory().absolutePath + "/Music")
         val files = mutableListOf<Playlist>()
         musicFolder.walk().forEach {
-            if (it.isFile and it.path.endsWith(".m3u8")) {
+            if (it.isFile and it.path.endsWith(".m3u")) {
                 files.add(Playlist(it.path,it.nameWithoutExtension, countSongs(it)))
             }
         }
@@ -78,7 +81,7 @@ object Utilities {
     }
 
     fun createFilePublic(fileName: String, songList: List<Song>) {
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "$fileName.m3u8")
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "$fileName.m3u")
         if (!file.exists()) {
             file.createNewFile()
         } else {
@@ -103,7 +106,7 @@ object Utilities {
                 line = reader.readLine()
                 continue
             }
-            val path = Uri.parse(line).path
+            val path = line
             val song = allSongs.find { it.path == path }
             if (song != null) {
                 songList.add(song)
