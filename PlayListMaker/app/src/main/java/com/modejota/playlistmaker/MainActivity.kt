@@ -6,14 +6,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modejota.playlistmaker.databinding.ActivityMainBinding
-
-// Falta:
-// - Internacionalizar, sacar strings a XML, etc.
 
 class MainActivity : AppCompatActivity() {
 

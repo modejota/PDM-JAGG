@@ -13,7 +13,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:contentDescription="Confirmar playlist"
+        android:contentDescription="@string/confirm_playlist"
         android:focusable="true"
         app:srcCompat="@android:drawable/ic_menu_save" />
 

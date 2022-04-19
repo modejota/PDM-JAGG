@@ -5,11 +5,9 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.modejota.playlistmaker.databinding.ItemPlaylistBinding
 
-
 class PlaylistAdapter(private val playlistList: List<Playlist>) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
     var onItemClick: ((Playlist) -> Unit)? = null
-
 
     override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,6 +19,7 @@ class PlaylistAdapter(private val playlistList: List<Playlist>) : RecyclerView.A
     }
 
     override fun getItemCount(): Int = playlistList.size
+
     fun getItem(position: Int): Playlist = playlistList[position]
 
     inner class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -35,8 +34,10 @@ class PlaylistAdapter(private val playlistList: List<Playlist>) : RecyclerView.A
 
         fun render(playlist: Playlist) {
             binding.playlistName.text = playlist.name
-            binding.playlistSize.text = playlist.size.toString() + " songs"
+            binding.playlistSize.text =
+                itemView.context.resources.getQuantityString(R.plurals.playlist_size, playlist.size, playlist.size)
         }
+
     }
 
 }

@@ -48,6 +48,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
         showActionMenu(false)
         return super.onCreateOptionsMenu(menu, inflater)
     }
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.allSongsAdd -> {
@@ -59,6 +60,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
         }
         return super.onOptionsItemSelected(item)
     }
+    
     private fun showActionMenu(show: Boolean) {
         actionMenu?.let {
             it.findItem(R.id.allSongsAdd).isVisible = show
@@ -68,9 +70,9 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
 
     private fun confirmAdd() {
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Add songs")
-        alertDialog.setMessage("Are you sure you want to add this songs?")
-        alertDialog.setPositiveButton("Yes") { _, _ ->
+        alertDialog.setTitle(getString(R.string.add_songs_title))
+        alertDialog.setMessage(getString(R.string.add_songs_message))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
             SharedData.addSongsID(selectedIndexes)
             val allSongs = SharedData.getAllSongs()
             selectedIndexes.forEach {
@@ -85,15 +87,15 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
             }
 
         }
-        alertDialog.setNegativeButton("No") { _, _ -> }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
     }
 
     private fun confirmDelete() {
         val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle("Delete songs")
-        alertDialog.setMessage("Are you sure you want to delete this songs?")
-        alertDialog.setPositiveButton("Yes") { _, _ ->
+        alertDialog.setTitle(getString(R.string.delete_songs_title))
+        alertDialog.setMessage(getString(R.string.delete_songs_message))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
             val adapter = binding.rvAllSongs.adapter as SongAdapter
             selectedIndexes.forEach {
                 val index = adapter.getSongList().indexOfFirst { song -> song.ID == it }
@@ -102,7 +104,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
             selectedIndexes.clear()
             showActionMenu(false)
         }
-        alertDialog.setNegativeButton("No") { _, _ -> }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
     }
 

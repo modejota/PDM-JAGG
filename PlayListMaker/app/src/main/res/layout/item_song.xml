@@ -27,7 +27,8 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_baseline_album" />
+            app:srcCompat="@drawable/ic_baseline_album"
+            android:contentDescription="@string/song_album_mini_image" />
 
     </FrameLayout>
 
@@ -77,6 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/songTitle"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_round_check_circle" />
+        app:srcCompat="@drawable/ic_round_check_circle"
+        android:contentDescription="@string/selected_tick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

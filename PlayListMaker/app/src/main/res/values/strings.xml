@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Playlist Maker</string>
+    <string name="add_songs_title">Add songs</string>
+    <string name="add_songs_message">Are you sure you want to add the selected songs?</string>
+    <string name="delete_songs_title">Delete songs</string>
+    <string name="delete_songs_message">Are you sure you want to delete the selected songs?</string>
+    <string name="affirmative">Yes</string>
+    <string name="negative">No</string>
+    <string name="please_enter_title">Please enter a title</string>
+    <string name="playlist_saved">Playlist saved</string>
+    <string name="error_saving_playlist">Error saving playlist</string>
+    <string name="no_songs_selected">No songs selected</string>
+    <string name="unknown_artist">Unknown artist</string>
+    <string name="create_playlist">Create playlist</string>
+    <string name="name">Name</string>
+    <string name="insert_playlist_name">Insert playlists\' name</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="confirm_playlist">Confirm playlist</string>
+    <string name="song_album_mini_image">Song\'s album\'s image</string>
+    <string name="selected_tick">Selected tick</string>
+    <plurals name="playlist_size">
+        <item quantity="one">%d song</item>
+        <item quantity="other">%d songs</item>
+    </plurals>
 </resources>

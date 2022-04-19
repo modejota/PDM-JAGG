@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.floor
 
 object Utilities {
+
     fun getMusicFromInternalStorage(context: Context): MutableList<Song> {
         val musicList = mutableListOf<Song>()
         val collection =
@@ -53,15 +54,18 @@ object Utilities {
                 var artist = cursor.getString(artistColumn)
                 val album = cursor.getString(albumColumn)
                 val albumId = cursor.getLong(albumIdColumn)
-                val contentUri: Uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
+                val contentUri: String = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id).path!!
                 val duration = cursor.getLong(durationColumn)
-                if (artist == "<unknown>") { artist = "Artista desconocido" }
+                if (artist == "<unknown>") {
+                    artist = context.resources.getString(R.string.unknown_artist)
+                }
                 musicList += Song(id, contentUri, name, artist, album, albumId, duration)
             }
         }
         musicList.sortBy { it.title }
         return musicList
     }
+
     fun getPlaylistsData(): List<Playlist> {
         val musicFolder = File(Environment.getExternalStorageDirectory().absolutePath + "/Music")
         val files = mutableListOf<Playlist>()
@@ -72,6 +76,7 @@ object Utilities {
         }
         return files
     }
+
     fun createFilePublic(fileName: String, songList: List<Song>) {
         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "$fileName.m3u8")
         if (!file.exists()) {
@@ -84,9 +89,10 @@ object Utilities {
         for (song in songList) {
             val segs = floor((song.duration / 1000).toDouble()).toInt()
             file.appendText("#EXTINF:${segs},${song.title}\n")
-            file.appendText("${song.uri}\n")
+            file.appendText("${song.path}\n")
         }
     }
+
     fun parseM3U8(file: File): MutableList<Song> {
         val allSongs = SharedData.getAllSongs()
         val songList = mutableListOf<Song>()
@@ -97,8 +103,8 @@ object Utilities {
                 line = reader.readLine()
                 continue
             }
-            val uri = Uri.parse(line)
-            val song = allSongs.find { it.uri == uri }
+            val path = Uri.parse(line).path
+            val song = allSongs.find { it.path == path }
             if (song != null) {
                 songList.add(song)
             }
@@ -106,6 +112,7 @@ object Utilities {
         }
         return songList
     }
+
     fun getSongsByIDs(): MutableList<Song> {
         val allSongs = SharedData.getAllSongs()
         val songList = mutableListOf<Song>()
