@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modejota.playlistmaker.databinding.FragmentSelectedSongsBinding
 import java.io.File
 
-
 class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
     private var _binding: FragmentSelectedSongsBinding? = null
@@ -151,6 +150,5 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
         adapter.changeVisibility(position)
         showActionMenu(selectedIndexes.isNotEmpty())
     }
-
 
 }

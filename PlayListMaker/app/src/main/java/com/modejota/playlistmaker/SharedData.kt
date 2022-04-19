@@ -1,6 +1,7 @@
 package com.modejota.playlistmaker
 
 object SharedData {
+
     private var playlistPath: String = ""
     private var songsID = mutableListOf<Long>()     // IDs de las canciones seleccionadas (confirmadas por el usuario)
     private var allSongs = mutableListOf<Song>()    // Todas las canciones leídas de la base de datos
@@ -19,4 +20,5 @@ object SharedData {
         songsID.clear()
         allSongs.clear()
     }
+
 }
