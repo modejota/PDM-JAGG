@@ -134,7 +134,11 @@ object Utilities {
 
     private fun countSongs(file: File): Int {
         var count = 0
-        file.forEachLine { if (it.startsWith("#EXTINF")) { count++ } }
+        file.forEachLine {
+            if (it.startsWith("#EXTINF")) {
+                count++
+            }
+        }
         return count
     }
 }
