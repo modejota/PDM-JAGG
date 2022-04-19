@@ -28,6 +28,7 @@
     <string name="all_songs">All songs</string>
     <string name="selected_songs">Selected songs</string>
     <string name="playlist">Playlist</string>
+    <string name="playlists_are_selected">There are playlists selected</string>
     <plurals name="playlist_size">
         <item quantity="one">%d song</item>
         <item quantity="other">%d songs</item>

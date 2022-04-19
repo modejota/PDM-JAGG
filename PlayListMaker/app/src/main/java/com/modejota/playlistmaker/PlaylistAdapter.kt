@@ -12,6 +12,8 @@ class PlaylistAdapter(
     private val listener: OnItemClickListener,
     ) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
+    private var isClickable = true
+
     override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return PlaylistViewHolder(layoutInflater.inflate(R.layout.item_playlist, parent, false))
@@ -23,6 +25,10 @@ class PlaylistAdapter(
     }
 
     override fun getItemCount(): Int = playlistList.size
+
+    fun setClickable(click: Boolean) {
+        isClickable = click
+    }
 
     fun changeVisibility(position: Int) {
         isClickedList[position] = !isClickedList[position]
@@ -44,7 +50,11 @@ class PlaylistAdapter(
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+                if (isClickable) {
+                    listener.onItemClick(position)
+                } else {
+                    Toast.makeText(v?.context, itemView.context.resources.getString(R.string.playlists_are_selected), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

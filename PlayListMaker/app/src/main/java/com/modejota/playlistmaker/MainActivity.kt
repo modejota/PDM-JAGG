@@ -132,6 +132,7 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             selectedPaths.add(item)
         }
         adapter.changeVisibility(position)
+        adapter.setClickable(selectedPaths.isEmpty())
         showActionMenu(selectedPaths.isNotEmpty())
 
     }
