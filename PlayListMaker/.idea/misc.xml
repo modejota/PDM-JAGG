@@ -13,6 +13,7 @@
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/item_song.xml" value="0.3905249679897567" />
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_all.xml" value="0.1" />
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_delete.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_delete_playlist.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/bottom_menu.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1315" />
         <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1315" />
@@ -24,5 +25,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.4" />
+      </ProjectState>
+    </option>
   </component>
 </project>
