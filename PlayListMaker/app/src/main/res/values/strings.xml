@@ -18,6 +18,11 @@
     <string name="confirm_playlist">Confirm playlist</string>
     <string name="song_album_mini_image">Song\'s album\'s image</string>
     <string name="selected_tick">Selected tick</string>
+    <string name="add_selected_songs">Add selected songs</string>
+    <string name="delete_selected_songs">Delete selected songs</string>
+    <string name="all_songs">All songs</string>
+    <string name="selected_songs">Selected songs</string>
+    <string name="playlist">Playlist</string>
     <plurals name="playlist_size">
         <item quantity="one">%d song</item>
         <item quantity="other">%d songs</item>

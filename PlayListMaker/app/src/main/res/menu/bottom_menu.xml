@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/allSongs_fragment"
-        android:title="All songs"
+        android:title="@string/all_songs"
         android:icon="@drawable/ic_baseline_music_note" />
     <item
         android:id="@+id/selectedSongs_fragment"
-        android:title="Playlist"
+        android:title="@string/selected_songs"
         android:icon="@drawable/ic_baseline_playlist" />
 </menu>

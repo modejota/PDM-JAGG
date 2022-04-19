@@ -13,11 +13,16 @@
     <string name="unknown_artist">Artista desconocido</string>
     <string name="create_playlist">Crear playlist</string>
     <string name="name">Nombre</string>
-    <string name="insert_playlist_name">Introduzca nombre de la playlist</string>
+    <string name="insert_playlist_name">Introduzca el nombre de la playlist</string>
     <string name="dialog_confirm">Confirmar</string>
     <string name="confirm_playlist">Confirmar playlist</string>
     <string name="song_album_mini_image">Imagen del álbum de la canción</string>
     <string name="selected_tick">Tick de selección</string>
+    <string name="add_selected_songs">Añadir canciones seleccionadas</string>
+    <string name="delete_selected_songs">Eliminar canciones seleccionadas</string>
+    <string name="all_songs">Todas las canciones</string>
+    <string name="selected_songs">Canciones seleccionadas</string>
+    <string name="playlist">Playlist</string>
     <plurals name="playlist_size">
         <item quantity="one">%d canción</item>
         <item quantity="other">%d canciones</item>

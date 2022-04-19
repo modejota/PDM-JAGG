@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/allSongs_fragment"
         android:name="com.modejota.playlistmaker.AllSongsFragment"
-        android:label="All songs">
+        android:label="@string/all_songs">
         <action
             android:id="@+id/action_allSongs_fragment_to_selectedSongs_fragment"
             app:destination="@id/selectedSongs_fragment" />
@@ -14,5 +14,5 @@
     <fragment
         android:id="@+id/selectedSongs_fragment"
         android:name="com.modejota.playlistmaker.SelectedSongsFragment"
-        android:label="Selected songs"/>
+        android:label="@string/selected_songs"/>
 </navigation>
