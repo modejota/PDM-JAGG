@@ -53,9 +53,11 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:padding="16dp"
+                    android:textColorHint="#757575"
                     android:textSize="18sp"
-                    android:inputType="text"/>
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
