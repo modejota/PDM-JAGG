@@ -23,7 +23,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
     private var _binding: FragmentAllSongsBinding? = null
 
     /**
-     * ViewBinding object for the fragment
+     * ViewBinding object's getter for the fragment
      */
     private val binding get() = _binding!!
 
