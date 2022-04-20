@@ -1,10 +1,12 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.modejota.playlistmaker.R
 import com.modejota.playlistmaker.databinding.ItemPlaylistBinding
+import com.modejota.playlistmaker.models.Playlist
 
 /**
  * Addapter class for playlist RecyclerView

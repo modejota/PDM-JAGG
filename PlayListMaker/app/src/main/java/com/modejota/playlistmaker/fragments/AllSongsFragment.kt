@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -6,13 +6,16 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.modejota.playlistmaker.R
+import com.modejota.playlistmaker.helpers.SharedData
+import com.modejota.playlistmaker.adapters.SongAdapter
 import com.modejota.playlistmaker.databinding.FragmentAllSongsBinding
 
 /**
  * Fragment to display all songs in the device's storage.
  * It implements interface to handle the click on a song.
  */
-class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener{
+class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
     /**
      * ViewBinding object for the fragment

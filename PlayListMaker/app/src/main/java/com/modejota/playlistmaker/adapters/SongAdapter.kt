@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.adapters
 
 import android.content.ContentUris
 import android.net.Uri
@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.modejota.playlistmaker.R
 import com.modejota.playlistmaker.databinding.ItemSongBinding
+import com.modejota.playlistmaker.models.Song
 import com.squareup.picasso.Picasso
 import java.util.*
 

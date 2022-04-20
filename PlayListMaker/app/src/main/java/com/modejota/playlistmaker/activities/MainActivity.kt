@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.activities
 
 import android.Manifest
 import android.app.AlertDialog
@@ -13,6 +13,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.modejota.playlistmaker.adapters.PlaylistAdapter
+import com.modejota.playlistmaker.R
+import com.modejota.playlistmaker.helpers.SharedData
+import com.modejota.playlistmaker.helpers.Utilities
 import com.modejota.playlistmaker.databinding.ActivityMainBinding
 
 /**

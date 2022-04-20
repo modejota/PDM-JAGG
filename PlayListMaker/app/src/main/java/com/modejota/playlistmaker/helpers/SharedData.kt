@@ -1,4 +1,6 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.helpers
+
+import com.modejota.playlistmaker.models.Song
 
 /**
  * Singleton class to share data between fragments in the playlist management

@@ -1,9 +1,12 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.helpers
 
 import android.content.Context
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import com.modejota.playlistmaker.R
+import com.modejota.playlistmaker.models.Playlist
+import com.modejota.playlistmaker.models.Song
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader

@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.models
 
 /**
  * Data class for a playlist.

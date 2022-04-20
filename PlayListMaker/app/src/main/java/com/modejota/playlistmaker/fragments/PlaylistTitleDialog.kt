@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.fragments
 
 import android.app.Dialog
 import android.graphics.Color

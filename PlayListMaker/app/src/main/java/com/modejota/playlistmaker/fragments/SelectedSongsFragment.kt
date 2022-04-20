@@ -1,4 +1,4 @@
-package com.modejota.playlistmaker
+package com.modejota.playlistmaker.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,7 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.modejota.playlistmaker.*
+import com.modejota.playlistmaker.adapters.SongAdapter
 import com.modejota.playlistmaker.databinding.FragmentSelectedSongsBinding
+import com.modejota.playlistmaker.helpers.SharedData
+import com.modejota.playlistmaker.helpers.Utilities
+import com.modejota.playlistmaker.models.Song
 import java.io.File
 
 /**
