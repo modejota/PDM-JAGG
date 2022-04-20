@@ -1,6 +1,5 @@
 package com.modejota.playlistmaker
 
-
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,10 +8,19 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.modejota.playlistmaker.databinding.DialogPlaylistTitleBinding
 
+/**
+ * Class to represent the popup dialog asking for the title of a playlist when saving one.
+ * It extends an special type of Fragment that is used to show dialogs.
+ *
+ * @property onSubmitClickListener The listener to be called when the user clicks the submit button.
+ */
 class PlaylistTitleDialog(
     private val onSubmitClickListener: (String) -> Unit
 ): DialogFragment() {
 
+    /**
+     * ViewBinding object for the DialogFragment.
+     */
     private lateinit var binding : DialogPlaylistTitleBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -21,11 +29,12 @@ class PlaylistTitleDialog(
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
 
-        binding.bAddQuantity.setOnClickListener {
-            onSubmitClickListener.invoke(binding.etAmount.text.toString())
-            dismiss()
+        binding.bInsertName.setOnClickListener {
+            onSubmitClickListener.invoke(binding.etName.text.toString())
+            dismiss()   // To close the dialog after submiting the name of the playlist.
         }
 
+        // Create the dialog itself, with transparent background and show it.
         val dialog = builder.create()
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return dialog

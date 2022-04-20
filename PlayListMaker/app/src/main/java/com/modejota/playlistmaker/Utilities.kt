@@ -1,9 +1,6 @@
 package com.modejota.playlistmaker
 
-import android.content.ContentUris
 import android.content.Context
-import android.database.Cursor
-import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -13,8 +10,18 @@ import java.io.FileReader
 import java.util.concurrent.TimeUnit
 import kotlin.math.floor
 
+/**
+ * Singleton class for utility functions used all over the app
+ */
 object Utilities {
 
+    /**
+     * Function to retrieve all songs (longer than 30 seconds) from the device's storage
+     * sorted by title ascending.
+     *
+     * @param context Context of the activity/fragment
+     * @return List of songs in the device sorted by title ascending
+     */
     fun getMusicFromInternalStorage(context: Context): MutableList<Song> {
         val musicList = mutableListOf<Song>()
         val collection =
@@ -41,6 +48,7 @@ object Utilities {
         )
         val sortOrder = "${MediaStore.Audio.Media.DISPLAY_NAME} ASC"
         val contentResolver = context.contentResolver
+        // Setup a SQL-like query to get selected data fron all songs longer than 30 seconds
         val query = contentResolver.query(collection,projection,selection,selectionArgs,sortOrder)
         query?.use { cursor ->
             val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
@@ -51,6 +59,7 @@ object Utilities {
             val durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
             val data = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
 
+            // For each result, retrieve the data, create a new Song object and add it to the list
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
                 val name = cursor.getString(nameColumn)
@@ -59,7 +68,7 @@ object Utilities {
                 val albumId = cursor.getLong(albumIdColumn)
                 val path = cursor.getString(data)
                 val duration = cursor.getLong(durationColumn)
-                if (artist == "<unknown>") {
+                if (artist == "<unknown>") {    // Little prettier output for unknown artist
                     artist = context.resources.getString(R.string.unknown_artist)
                 }
                 musicList += Song(id, path, name, artist, album, albumId, duration)
@@ -69,6 +78,11 @@ object Utilities {
         return musicList
     }
 
+    /**
+     * Function to retrive playlists' files (.m3u) from the device's storage
+     *
+     * @return List of playlists (represented as project's object) in the device
+     */
     fun getPlaylistsData(): List<Playlist> {
         val musicFolder = File(Environment.getExternalStorageDirectory().absolutePath + "/Music")
         val files = mutableListOf<Playlist>()
@@ -79,6 +93,13 @@ object Utilities {
         }
         return files
     }
+
+    /**
+     * Function to create a playlist file (.m3u) in the device's storage, under Music folder
+     *
+     * @param fileName Name of the playlist file (without .m3u extension)
+     * @param songList List of songs to add to the playlist
+     */
 
     fun createFilePublic(fileName: String, songList: List<Song>) {
         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "$fileName.m3u")
@@ -96,7 +117,17 @@ object Utilities {
         }
     }
 
-    fun parseM3U8(file: File): MutableList<Song> {
+    /**
+     * Function to retrieve the songs of a playlist file (.m3u)
+     * It assumess the file follows the standard, so #EXTM3U is the first line, and for each song,
+     * there is a line with #EXTINF:<duration>,<song name> and other line with the path.
+     * Non standard attributes, such as #EXTALB or #EXTART, are not supposed to appear.
+     *
+     * @param file File of the playlist (.m3u)
+     * @return List of songs of the playlist
+     */
+
+    fun parseM3U(file: File): MutableList<Song> {
         val allSongs = SharedData.getAllSongs()
         val songList = mutableListOf<Song>()
         val reader = BufferedReader(FileReader(file))
@@ -116,6 +147,11 @@ object Utilities {
         return songList
     }
 
+    /**
+     * Function to retrieve the songs with specific IDs from the shared data in the app
+     *
+     * @return Songs with the specific IDs
+     */
     fun getSongsByIDs(): MutableList<Song> {
         val allSongs = SharedData.getAllSongs()
         val songList = mutableListOf<Song>()
@@ -128,6 +164,11 @@ object Utilities {
         return songList
     }
 
+    /**
+     * Function to delete a file from the device's storage
+     *
+     * @param path Path of the file to delete
+     */
     fun deletePlaylistFileFromStorage(path: String) {
         val file = File(path)
         if (file.exists()) {
@@ -135,6 +176,12 @@ object Utilities {
         }
     }
 
+    /**
+     * Function to count the number of songs in a playlist file (.m3u)
+     *
+     * @param file File of the playlist (.m3u)
+     * @return Number of songs in the playlist
+     */
     private fun countSongs(file: File): Int {
         var count = 0
         file.forEachLine {

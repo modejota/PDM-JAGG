@@ -8,8 +8,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.modejota.playlistmaker.databinding.ActivityPlaylistManagementBinding
 
+/**
+ * Class to represent the Playlist Management, where fragments with those functionality will be held.
+ */
 class PlaylistManagementActivity : AppCompatActivity() {
 
+    /**
+     * ViewBinding object to be used in the activity.
+     */
     private lateinit var binding: ActivityPlaylistManagementBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +23,8 @@ class PlaylistManagementActivity : AppCompatActivity() {
         binding = ActivityPlaylistManagementBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set up the bottom navigation bar (the fragment-container)
+        // and the fragment in each element of the container.
         val bottomNavigationView = binding.bottomNavigationView
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
 

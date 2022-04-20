@@ -15,10 +15,24 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modejota.playlistmaker.databinding.ActivityMainBinding
 
+/**
+ * Class MainActivity, entry point for the app.
+ */
 class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
 
+    /**
+     * ViewBinding object for this activity
+     */
     private lateinit var binding: ActivityMainBinding
+
+    /**
+     * Reference to the upper ActionMenu in the Toolbar
+     */
     private var actionMenu: Menu? = null
+
+    /**
+     * List of paths selected when the user long-clicks on a playlist
+     */
     private val selectedPaths = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +41,7 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
         setContentView(binding.root)
         initRecyclerView()
 
-        askForPermission()
+        askForPermission()  // Ask for permission to write/read external storage (API dependent)
 
         binding.createPlaylistFloatingButton.setOnClickListener {
             val intent = Intent(this, PlaylistManagementActivity::class.java)
@@ -38,14 +52,13 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             initRecyclerView()
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        SharedData.clearAll()
-
+        SharedData.clearAll()   // Clear all data when the activity is created
     }
 
     override fun onStart() {
         super.onStart()
-        SharedData.clearAll()
-        initRecyclerView()
+        SharedData.clearAll()   // At the start of the activity, clear all data
+        initRecyclerView()      // and re-initialize to keep consistency
     }
 
     override fun onRequestPermissionsResult(
@@ -54,6 +67,7 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // If the user granted the permission, then we can re-initialize the view and get the data
         if (grantResults.isNotEmpty()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -69,12 +83,17 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        actionMenu = menu
+        actionMenu = menu   // Save the reference to the menu
         menuInflater.inflate(R.menu.action_bar_delete_playlist, menu)
         showActionMenu(false)
         return super.onCreateOptionsMenu(menu)
     }
 
+    /**
+     * Method to show or hide the ActionMenu
+     *
+     * @param show Boolean to show or hide the ActionMenu
+     */
     private fun showActionMenu(show: Boolean) {
         actionMenu?.let {
             it.findItem(R.id.selectedPlaylistDelete).isVisible = show
@@ -90,6 +109,9 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Method to confirm the deletion of the selected playlists' files in the internal storage
+     */
     private fun confirmDelete() {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setTitle(getString(R.string.delete_playlist_title))
@@ -98,23 +120,33 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             selectedPaths.forEach {
                 Utilities.deletePlaylistFileFromStorage(it)
             }
-            initRecyclerView()
+            initRecyclerView()  // Re-initialize the view to keep consistency
             Toast.makeText(this, getString(R.string.confirm_playlist_deleted), Toast.LENGTH_SHORT).show()
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
     }
 
+    /**
+     * Method to initialize the RecyclerView.
+     * It will get the playlists' data from the internal storage and load it into the RecyclerView
+     */
     private fun initRecyclerView() {
         binding.rvPlaylistList.layoutManager = LinearLayoutManager(this)
         val playlistsList = Utilities.getPlaylistsData()
         val isClickedList = mutableListOf<Boolean>()
         isClickedList.addAll(Array(playlistsList.size) { false })
         binding.rvPlaylistList.adapter = PlaylistAdapter(playlistsList, isClickedList, this)
-        selectedPaths.clear()
+        selectedPaths.clear()   // At start, no path is selected, so no ActionMenu is shown
         showActionMenu(false)
     }
 
+    /**
+     * Function overriding from own interface. Called when the user clicks on a playlist.
+     * Launchs and activity to modify the playlist's songs.
+     *
+     * @param position Position in the RecyclerView of the clicked item
+     */
     override fun onItemClick(position: Int) {
         val adapter = binding.rvPlaylistList.adapter as PlaylistAdapter
         SharedData.setPlaylistPath(adapter.getItem(position).path)
@@ -123,6 +155,11 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
         startActivity(intent)
     }
 
+    /**
+     * Function overriding from own interface. Called when the user long-clicks on a playlist.
+     *
+     * @param position Position in the RecyclerView of the long-clicked item
+     */
     override fun onItemLongClick(position: Int) {
         val adapter = binding.rvPlaylistList.adapter as PlaylistAdapter
         val item = adapter.getItem(position).path
@@ -131,12 +168,17 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
         } else {
             selectedPaths.add(item)
         }
-        adapter.changeVisibility(position)
+        adapter.changeVisibility(position)  // Change the visibility of the item's tick
+        // While at least one item is selected, avoid entering in a playlist
         adapter.setClickable(selectedPaths.isEmpty())
-        showActionMenu(selectedPaths.isNotEmpty())
+        showActionMenu(selectedPaths.isNotEmpty())  // Show the ActionMenu if at least one item is selected
 
     }
 
+    /**
+     * Function to ask for the necessary permissions.
+     * Different permissions are asked depending on the Android version. (Q)
+     */
     private fun askForPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
