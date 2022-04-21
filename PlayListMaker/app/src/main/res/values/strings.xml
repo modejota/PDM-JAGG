@@ -18,7 +18,7 @@
     <string name="unknown_artist">Unknown artist</string>
     <string name="create_playlist">Create playlist</string>
     <string name="name">Name</string>
-    <string name="insert_playlist_name">Insert playlists\' name</string>
+    <string name="insert_playlist_name">Insert playlist\'s name</string>
     <string name="dialog_confirm">Confirm</string>
     <string name="confirm_playlist">Confirm playlist</string>
     <string name="song_album_mini_image">Song\'s album\'s image</string>
