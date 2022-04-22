@@ -16,7 +16,7 @@ import com.modejota.playlistmaker.models.Playlist
  * @property listener       Listener for click and long-click events
  */
 class PlaylistAdapter(
-    private val playlistList: List<Playlist>,
+    private val playlistList: MutableList<Playlist>,
     private val isClickedList: MutableList<Boolean>,
     private val listener: OnItemClickListener,
     ) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {

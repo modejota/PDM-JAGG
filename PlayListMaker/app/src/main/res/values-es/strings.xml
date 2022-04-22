@@ -8,11 +8,14 @@
     <string name="delete_songs_title">Eliminar canciones</string>
     <string name="delete_songs_message">¿Desea eliminar las canciones seleccionadas?</string>
     <string name="delete_playlist_title">Eliminar playlists</string>
+    <string name="delete_single_playlist_title">Eliminar playlist</string>
     <string name="delete_playlist_message">¿Desea eliminar las playlists seleccionadas?</string>
+    <string name="delete_single_playlist_message">¿Desea eliminar esta playlist? Esta acción no se puede deshacer</string>
     <string name="affirmative">Sí</string>
     <string name="negative">No</string>
     <string name="please_enter_title">Por favor, introduzca un título</string>
     <string name="playlist_saved">Playlist guardada</string>
+    <string name="playlist_deleted">Playlist eliminada</string>
     <string name="error_saving_playlist">Error guardando playlist</string>
     <string name="no_songs_selected">No hay canciones seleccionadas</string>
     <string name="unknown_artist">Artista desconocido</string>

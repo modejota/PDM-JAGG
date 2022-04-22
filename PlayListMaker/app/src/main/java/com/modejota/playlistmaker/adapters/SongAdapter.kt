@@ -67,6 +67,13 @@ class SongAdapter(
     fun getSongList() : List<Song> = songList
 
     /**
+     * Function to retrieve a song in the given position
+     *
+     * @param position Position of the song to be returned
+     */
+    fun getSongPosition(position: Int) = songList[position]
+
+    /**
      * Function to swap the position of two songs in the adapter
      *
      * @param from Position of the song to be moved

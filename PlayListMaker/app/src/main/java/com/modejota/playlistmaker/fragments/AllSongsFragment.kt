@@ -1,9 +1,13 @@
 package com.modejota.playlistmaker.fragments
 
 import android.app.AlertDialog
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +61,25 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
         initRecyclerView()
 
+        // Object to manage the swipe left to delete item
+        val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = (binding.rvAllSongs.adapter as SongAdapter)
+                val position = viewHolder.adapterPosition
+                selectedIndexes.remove(adapter.getSongPosition(position).ID)
+                adapter.deleteSong(position)
+                Toast.makeText(context, "Song deleted", Toast.LENGTH_SHORT).show()
+                showActionMenu(selectedIndexes.isNotEmpty())
+            }
+        })
+        touchHelper.attachToRecyclerView(binding.rvAllSongs)
     }
 
     override fun onDestroyView() {
@@ -156,7 +179,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
      */
     override fun onItemClick(position: Int) {
         val adapter = binding.rvAllSongs.adapter as SongAdapter
-        val it = adapter.getSongList()[position]
+        val it = adapter.getSongPosition(position)
         if (selectedIndexes.contains(it.ID)) {
             selectedIndexes.remove(it.ID)
         } else {
