@@ -86,7 +86,7 @@ object Utilities {
      *
      * @return List of playlists (represented as project's object) in the device
      */
-    fun getPlaylistsData(): List<Playlist> {
+    fun getPlaylistsData(): MutableList<Playlist> {
         val musicFolder = File(Environment.getExternalStorageDirectory().absolutePath + "/Music")
         val files = mutableListOf<Playlist>()
         musicFolder.walk().forEach {

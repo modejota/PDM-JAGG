@@ -12,7 +12,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.modejota.playlistmaker.adapters.PlaylistAdapter
 import com.modejota.playlistmaker.R
 import com.modejota.playlistmaker.helpers.SharedData
@@ -59,6 +61,23 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             initRecyclerView()
             binding.swipeRefreshLayout.isRefreshing = false
         }
+        // Object to manage the deletion of a playlist file
+        val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ) = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = (binding.rvPlaylistList.adapter as PlaylistAdapter)
+                val path = adapter.getItem(viewHolder.adapterPosition).path
+                confirmSingleDelete(path)
+            }
+
+        })
+        touchHelper.attachToRecyclerView(binding.rvPlaylistList)
         SharedData.clearAll()   // Clear all data when the activity is created
     }
 
@@ -127,6 +146,22 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             selectedPaths.forEach {
                 Utilities.deletePlaylistFileFromStorage(it)
             }
+            initRecyclerView()  // Re-initialize the view to keep consistency
+            Toast.makeText(this, getString(R.string.confirm_playlist_deleted), Toast.LENGTH_SHORT).show()
+        }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
+        alertDialog.show()
+    }
+
+    /**
+     * Method to confirm the deletion of a single playlist selected via swipe.
+     */
+    private fun confirmSingleDelete(path: String) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.delete_single_playlist_title))
+        alertDialog.setMessage(getString(R.string.delete_single_playlist_message))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
+            Utilities.deletePlaylistFileFromStorage(path)
             initRecyclerView()  // Re-initialize the view to keep consistency
             Toast.makeText(this, getString(R.string.confirm_playlist_deleted), Toast.LENGTH_SHORT).show()
         }
