@@ -16,6 +16,8 @@ Con Android 11 se incluye un nuevo sistema de gestión de permisos a nivel de SO
 
 Dado que no utilizo ninguno de estos permisos, y se necesita escribir mucho más código con la nueva API, prefiero no utilizarla y hacer uso del "método clásico".
 
+Mencionar también, por curiosidad, que he tenido problemas de permisos al intentar eliminar playlists creadas con versiones construidas con código procedente de otro ordenador (sincronizado por Git/Github). La aplicación sólo puede eliminar los ficheros que ella misma crea, y en estos casos la firma variaba.
+
 # Cambiar la visibilidad de elementos en la interfaz
 
 En las primeras pruebas que hice, siguiendo algunos tutoriales, era la clase ViewHolder de cada Adapter la encargada de cambiar la visibilidad de los elementos. Resulta obvio, pero los RecyclerView reciclan los elementos, por lo que los cambios en una dada posición se replicaban en la misma posición posteriormente, para otra canción distinta, tras el reciclado.
@@ -37,15 +39,13 @@ Utilizo esta segunda opción, tras haber probado ambas, ya que me es más facil 
 
 # Deslizar para realizar acciones.
 
-Una de las sugerencias recibidas, que nunca me convenció demasiado dado el contexto de la aplicación, era que el borrado de canciones o su añadido a la selección se hiciera mediante gestos de deslizamiento sobre los objetos del listado.
+El framework proporciona una clase llamada "ItemTouchHelper" para facilitar la gestión de gestos hacia laterales y arriba/abajo. El "problema" de dicha clase es que espera que los gestos de deslizamiento, ya sea hacia los laterales o hacia arriba/abajo, desemboquen en un reposicionamiento de los elementos del listado sí o sí. Esto tiene sentido si deslizamos para eliminar un archivo o si deslizamos para archivarlo o reposicionarlo, los cuales son los usos típicos de esta clase. 
 
-El framework proporciona una clase llamada "ItemTouchHelper" para realizar dichas acciones. El "problema" de dicha clase es que espera que los gestos de deslizamiento, ya sea hacia los laterales o hacia arriba, desemboquen en un reposicionamiento de los elementos del listado sí o sí. Esto tiene sentido si deslizamos para eliminar un archivo o si deslizamos para archivarlo o reposicionarlo, los cuales son los usos típicos de esta clase. 
+En uno de nuestros casos, al deslizar para añadir la canción a la lista, no movemos ningun elemento del listado de sitio. Al no mover elementos, provoca errores en el visualizado del elemento deslizado, dejandolo en blanco y sin hacer que ningún otro ocupe su lugar hasta que no deslizamos y forzamos el re-renderizado del elemento, que procede a desaparecer.
 
-Sin embargo, no tiene sentido en nuestra aplicación; al deslizar para añadir la canción a la lista no movemos ningun elemento del listado de sitio. Al no mover elementos, provoca errores en el visualizado del elemento deslizado, dejandolo en blanco y sin hacer que ningún otro ocupe su lugar hasta que no deslizamos y forzamos el re-renderizado del elemento, que procede a desaparecer.
+He optado por implementar selección/deselección mediante toques en los elementos para las canciones, y toques largos para las listas de reproducción. Si hay elementos seleccionados, apareceran en la barra superior botones que permitan realizar las acciones deseadas. Me parece un enfoque cómodo cuando tenemos manipular un número de canciones considerable. También, se mantiene el gesto de deslizar hacia la izquierda para eliminar elementos uno a uno, lo cual puede resultar util si la cantidad de elementos a manipular es pequeña.
 
-Finalmente, he optado por implementar selección/deselección mediante toques en los elementos para las canciones, y toques largos para las listas de reproducción. Si hay elementos seleccionados, apareceran en la barra superior botones que permitan realizar las acciones deseadas. Me parece un enfoque más cómodo para el usuario que realizar muchos deslizamientos.
-
-He de mencionar que sí utilizo la clase "ItemTouchHelper" para gestionar la reordenación de las canciones seleccionadas. Esta clase facilita enormemente esta casuística, permitiendo camnbiar la transparencia del objeto mientras se desplaza, por ejemplo.
+También se hace uso de la clase "ItemTouchHelper" para gestionar la reordenación de las canciones seleccionadas. Esta clase facilita enormemente esta casuística, permitiendo cambiar la transparencia del objeto mientras se desplaza, por ejemplo.
 
 # Compartir datos en la aplicación.
 
@@ -76,6 +76,6 @@ RetroMusic Player, el que utilizo habitualmente, guarda los ficheros en la raiz 
 
 Además, si clickas en el archivo M3U y eliges abrirlo con una aplicación concreta en el menú contextual, ni Blackplayer ni RetroMusic los importan correctamente. Sólo permiten importarlos desde interfaz. Por último, cabe destacar que ambas aplicaciones esperan rutas absolutas.
 
-Por último, la navaja suiza de los reproductores, VLC, espera URIs, por lo que al intentar importar canciones especificadas como rutas absolutas falla. (En versiones de pruebas lo exportaba como URIs y funcionaba correctamente.)
+Por último, la navaja suiza de los reproductores, VLC, espera URIs, por lo que al intentar importar canciones especificadas como rutas absolutas falla. (En versiones de pruebas lo exportaba como URIs y funcionaba correctamente.). VLC es un reproductor orientado a vídeo, con capacidades para reproducir vídeo por streaming, para lo que necesita las URIs de los ficheros. Entiendo que por esta funcionalidad orienta M3U sólo a vídeo, ignorando la parte musical. 
 
 Después de haber estado cacharreando varios reproductores y haber consultado el código de algunos libres, como RetroMusic, me da la impresión de que la gestión de listas de reproducción procedentes de fuera de la aplicación está muy descuidada, habiendo aplicaciones que ni lo permiten.
