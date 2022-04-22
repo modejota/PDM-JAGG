@@ -29,8 +29,11 @@
     - 4.6. Al intentar guardar una lista de reproducción, deberá mostrarse una dialogo emergente para preguntar por el título.
     - 4.7. Al intentar guardar una lista de reproducción, si el título introducido es vacío se mostrará un mensaje. Aborta la operación.
     - 4.8. Al intentar guardar una lista de reproducción, si se pulsa fuera del diálogo que pregunta por el título se cancela la operación.
+    - 4.9. Al intentar abrir una aplicación reproductora externa, el usuario deberá confirmar la acción y seleccionar la que desee (si no establece una por defecto).
 
 - 5. La aplicación funcionará sólo en modo vertical.
+
+- 6. Se dispondrán de botones para abrir aplicaciones reproductoras de música externas, a elección del usuario.
 
 # Requisitos no funcionales
 ---
@@ -44,6 +47,9 @@
     - 6.6. Se tendrá un botón para guardar una lista de reproducción.
     - 6.7. Mientras se tengan listas de reproducción seleccionadas, no se permitirá acceder a editar ninguna de ellas, pero sí a crear una nueva.
     - 6.8. Al pulsar los iconos de acción, salvo el de guardar, deberán aparecer los correspondientes pop-ups de confirmación.
+    - 6.9. Se podrán eliminar canciones individualmente, tanto en el listado general, como en el listado seleccionado, con el gesto "swipe to the left".
+    - 6.10. Se podrán eliminar una playlist de forma individual con el gesto "swipe to left".
+    - 6.11. Se tendrá un botón en la lista de canciones seleccionadas y otro en el listado de playlists, para poder abrir una aplicación reproductora de música externa.
 
 - 7. La aplicación debe disponer de modo claro y modo oscuro, de acuerdo a los ajustes del sistema.
 
