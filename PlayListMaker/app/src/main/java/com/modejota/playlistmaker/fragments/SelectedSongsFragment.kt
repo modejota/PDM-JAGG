@@ -1,6 +1,8 @@
 package com.modejota.playlistmaker.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.content.Intent.makeMainSelectorActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -98,6 +100,10 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             }
         }
 
+        binding.openMusicplayerButton.setOnClickListener {
+            confirmRedirectToMusicApp()
+        }
+
         // Object to manage the drag and drop functionality. (Reorder the songs)
         val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
@@ -175,6 +181,25 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             selectedIndexes.clear()  // After deleting, no songs are selected and no menu is shown.
             showActionMenu(false)
             Toast.makeText(context, getString(R.string.confirm_songs_deleted), Toast.LENGTH_SHORT).show()
+        }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
+        alertDialog.show()
+    }
+
+    /**
+     * Function to confirm the redirection to a music app
+     */
+    private fun confirmRedirectToMusicApp() {
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.setTitle(getString(R.string.redirect_title))
+        alertDialog.setMessage(getString(R.string.redirect_text))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
+            val intent = makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC)
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(context, getString(R.string.no_music_player_found), Toast.LENGTH_SHORT).show()
+            }
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()

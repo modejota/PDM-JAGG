@@ -29,8 +29,11 @@
     <string name="selected_songs">Selected songs</string>
     <string name="playlist">Playlist</string>
     <string name="playlists_are_selected">There are playlists selected</string>
+    <string name="no_music_player_found">No music player found</string>
     <plurals name="playlist_size">
         <item quantity="one">%d song</item>
         <item quantity="other">%d songs</item>
     </plurals>
+    <string name="redirect_title">Open player</string>
+    <string name="redirect_text">Do you want to open a music player app?</string>
 </resources>

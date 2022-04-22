@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             SharedData.setAllSongs(Utilities.getMusicFromInternalStorage(this))
             startActivity(intent)
         }
+        binding.redirectMusicplayerButton.setOnClickListener {
+            confirmRedirectToMusicApp()
+        }
         binding.swipeRefreshLayout.setOnRefreshListener {
             initRecyclerView()
             binding.swipeRefreshLayout.isRefreshing = false
@@ -126,6 +129,26 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             }
             initRecyclerView()  // Re-initialize the view to keep consistency
             Toast.makeText(this, getString(R.string.confirm_playlist_deleted), Toast.LENGTH_SHORT).show()
+        }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
+        alertDialog.show()
+    }
+
+    /**
+     * Function to confirm the redirection to a music player app.
+     */
+    private fun confirmRedirectToMusicApp() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.redirect_title))
+        alertDialog.setMessage(getString(R.string.redirect_text))
+        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
+            val intent =
+                Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC)
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(this, getString(R.string.no_music_player_found), Toast.LENGTH_SHORT).show()
+            }
         }
         alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
         alertDialog.show()
