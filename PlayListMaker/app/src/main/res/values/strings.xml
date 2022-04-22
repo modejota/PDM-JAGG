@@ -3,6 +3,7 @@
     <string name="add_songs_title">Add songs</string>
     <string name="confirm_songs_added">Songs added</string>
     <string name="confirm_songs_deleted">Songs deleted</string>
+    <string name="confirm_song_deleted">Song deleted</string>
     <string name="confirm_playlist_deleted">Playlist deleted</string>
     <string name="add_songs_message">Are you sure you want to add the selected songs?</string>
     <string name="delete_songs_title">Delete songs</string>

@@ -124,7 +124,7 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
                     val position = viewHolder.adapterPosition
                     selectedIndexes.remove(adapter.getSongPosition(position).ID)
                     adapter.deleteSong(position)
-                    Toast.makeText(context, "Song deleted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.confirm_song_deleted), Toast.LENGTH_SHORT).show()
                     showActionMenu(selectedIndexes.isNotEmpty())
                 }
 
