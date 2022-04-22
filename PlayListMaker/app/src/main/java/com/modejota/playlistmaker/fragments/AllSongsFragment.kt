@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.modejota.playlistmaker.R
 import com.modejota.playlistmaker.helpers.SharedData
 import com.modejota.playlistmaker.adapters.SongAdapter
@@ -53,12 +55,8 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // No element is selected at the beginning
-        val isClickedList = mutableListOf<Boolean>()
-        isClickedList.addAll(Array(SharedData.getAllSongs().size) { false })
+        initRecyclerView()
 
-        binding.rvAllSongs.layoutManager= LinearLayoutManager(context)
-        binding.rvAllSongs.adapter= SongAdapter(SharedData.getAllSongs(), isClickedList, this)
     }
 
     override fun onDestroyView() {
@@ -86,6 +84,17 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
     }
 
     /**
+     * Initialize the RecyclerView and its adapter with the list of songs, none of them selected
+     */
+    private fun initRecyclerView(){
+        // Nothing is selected at the beginning
+        val isClickedList = mutableListOf<Boolean>()
+        isClickedList.addAll(Array(SharedData.getAllSongs().size) { false })
+        binding.rvAllSongs.layoutManager= LinearLayoutManager(context)
+        binding.rvAllSongs.adapter= SongAdapter(SharedData.getAllSongs(), isClickedList, this)
+    }
+
+    /**
      * Function to show or hide the upper ActionMenu and its items
      * @param show Boolean to show or hide the ActionMenu
      */
@@ -105,15 +114,9 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
         alertDialog.setMessage(getString(R.string.add_songs_message))
         alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
             SharedData.addSongsID(selectedIndexes)
-            val allSongs = SharedData.getAllSongs()
-            selectedIndexes.forEach {
-                val index = allSongs.indexOfFirst { song -> song.ID == it }
-                // To avoid IllegalStateException: cannot call this method while RecyclerView is computing a layout
-                binding.rvAllSongs.post {   // Perform click to deselect the song and hide the tick
-                    binding.rvAllSongs.findViewHolderForAdapterPosition(index)?.itemView?.performClick()
-                }
-            }
-            // Reset the selected indexes and hide the menu after clicks on the items are computed
+            // Re-draw the view with everything non-ticked
+            initRecyclerView()
+            // Reset the selected indexes and hide the menu after the layout is redrawn
             binding.rvAllSongs.post {
                 selectedIndexes.clear()
                 showActionMenu(false)
