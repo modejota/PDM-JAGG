@@ -10,6 +10,8 @@ package com.modejota.playlistmaker.models
  * @property album Album of the song.
  * @property albumID ID of the album.
  * @property duration Duration of the song (milliseconds).
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 data class Song(val ID: Long,
                 val path: String,
