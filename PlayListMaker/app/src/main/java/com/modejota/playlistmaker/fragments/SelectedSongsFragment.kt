@@ -100,10 +100,6 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
             }
         }
 
-        binding.openMusicplayerButton.setOnClickListener {
-            confirmRedirectToMusicApp()
-        }
-
         // Object to manage the drag and drop functionality. (Reorder the songs)
         val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN , ItemTouchHelper.LEFT) {

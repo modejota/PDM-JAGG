@@ -3,7 +3,7 @@
     <string name="add_songs_title">Añadir canciones</string>
     <string name="confirm_songs_added">Canciones añadidas</string>
     <string name="confirm_songs_deleted">Canciones eliminadas</string>
-    <string name="confirm_song_deleted">Canción deleted</string>
+    <string name="confirm_song_deleted">Canción eliminada</string>
     <string name="confirm_playlist_deleted">Playlists eliminadas</string>
     <string name="add_songs_message">¿Desea añadir las canciones seleccionadas?</string>
     <string name="delete_songs_title">Eliminar canciones</string>

@@ -53,12 +53,16 @@ dependencies {
 
 tasks.dokkaHtml.configure {
     outputDirectory.set(file("../docs/dokka"))
-}
-
-dokkaHtml.configure {
+    moduleName.set("Playlist Maker")
     dokkaSourceSets {
         named("main") {
             skipDeprecated.set(true)
         }
     }
+}
+
+tasks.withType(dokkaHtml.getClass()).configureEach {
+    pluginsMapConfiguration.set(
+            ["org.jetbrains.dokka.base.DokkaBase": """{ "separateInheritedMembers": true}"""]
+    )
 }
