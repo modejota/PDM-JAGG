@@ -25,9 +25,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="86dp"
         android:clickable="true"
-        android:contentDescription="@string/confirm_playlist"
+        android:contentDescription="@string/music_player"
         android:focusable="true"
-        app:srcCompat="@android:drawable/ic_menu_send" />
+        app:srcCompat="@drawable/ic_baseline_music_note" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelectedSongs"

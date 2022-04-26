@@ -24,11 +24,12 @@ class PlaylistManagementActivity : AppCompatActivity() {
         binding = ActivityPlaylistManagementBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up the bottom navigation bar (the fragment-container)
+        // Set up the bottom navigation bar (the fragment-container, the controller)
         // and the fragment in each element of the container.
         val bottomNavigationView = binding.bottomNavigationView
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
 
+        // Set up the action bar, so text shown change for diferent fragments.
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.allSongs_fragment,
             R.id.selectedSongs_fragment

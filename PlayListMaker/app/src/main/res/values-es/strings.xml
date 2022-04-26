@@ -33,6 +33,7 @@
     <string name="selected_songs">Canciones seleccionadas</string>
     <string name="playlist">Playlist</string>
     <string name="playlists_are_selected">Hay playlists seleccionadas</string>
+    <string name="music_player">Reproductor de música</string>
     <string name="no_music_player_found">Reproductor de música no encontrado</string>
     <plurals name="playlist_size">
         <item quantity="one">%d canción</item>

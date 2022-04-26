@@ -69,7 +69,7 @@ class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean = false
-
+            //As we only permit left swipe, we don't need to check the direction of the swipe
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = (binding.rvAllSongs.adapter as SongAdapter)
                 val position = viewHolder.adapterPosition
