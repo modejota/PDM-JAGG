@@ -1,8 +1,6 @@
 package com.modejota.playlistmaker.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
-import android.content.Intent.makeMainSelectorActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -21,26 +19,32 @@ import java.io.File
 /**
  * Class to represent the fragment where selected songs are displayed.
  * It implements interface to handle the click events on the songs.
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
     /**
      * ViewBinding object for the fragment.
+     * @property binding
      */
     private var _binding: FragmentSelectedSongsBinding? = null
 
     /**
      * ViewBinding object to access the layout items.
+     * @property binding
      */
     private val binding get() = _binding!!
 
     /**
      * Reference to the ActionMenu of the Toolbar.
+     * @property actionMenu
      */
     private var actionMenu: Menu? = null
 
     /**
      * List with the IDs of the selected songs.
+     * @property selectedIndexes
      */
     private var selectedIndexes = mutableListOf<Long>()
 
@@ -189,24 +193,6 @@ class SelectedSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
         alertDialog.show()
     }
 
-    /**
-     * Function to confirm the redirection to a music app
-     */
-    private fun confirmRedirectToMusicApp() {
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.setTitle(getString(R.string.redirect_title))
-        alertDialog.setMessage(getString(R.string.redirect_text))
-        alertDialog.setPositiveButton(getString(R.string.affirmative)) { _, _ ->
-            val intent = makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC)
-            try {
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(context, getString(R.string.no_music_player_found), Toast.LENGTH_SHORT).show()
-            }
-        }
-        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
-        alertDialog.show()
-    }
 
     /**
      * Function overriding from own interface. Called when the user clicks on a song in the list.

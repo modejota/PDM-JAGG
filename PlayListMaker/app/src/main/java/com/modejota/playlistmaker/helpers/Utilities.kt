@@ -15,6 +15,7 @@ import kotlin.math.floor
 
 /**
  * Singleton class for utility functions used all over the app
+ * @author José Alberto Gómez García    -   @modejota
  */
 object Utilities {
 

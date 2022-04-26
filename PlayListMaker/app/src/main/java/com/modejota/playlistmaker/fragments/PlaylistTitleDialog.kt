@@ -13,6 +13,9 @@ import com.modejota.playlistmaker.databinding.DialogPlaylistTitleBinding
  * It extends an special type of Fragment that is used to show dialogs.
  *
  * @property onSubmitClickListener The listener to be called when the user clicks the submit button.
+ *
+ * @author José Alberto Gómez García    -   @modejota
+ *
  */
 class PlaylistTitleDialog(
     private val onSubmitClickListener: (String) -> Unit
@@ -20,6 +23,7 @@ class PlaylistTitleDialog(
 
     /**
      * ViewBinding object for the DialogFragment.
+     * @property binding
      */
     private lateinit var binding : DialogPlaylistTitleBinding
 

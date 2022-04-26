@@ -23,21 +23,26 @@ import com.modejota.playlistmaker.databinding.ActivityMainBinding
 
 /**
  * Class MainActivity, entry point for the app.
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
 
     /**
      * ViewBinding object for this activity
+     * @property binding
      */
     private lateinit var binding: ActivityMainBinding
 
     /**
      * Reference to the upper ActionMenu in the Toolbar
+     * @property actionMenu
      */
     private var actionMenu: Menu? = null
 
     /**
      * List of paths selected when the user long-clicks on a playlist
+     * @property selectedPaths
      */
     private val selectedPaths = mutableListOf<String>()
 

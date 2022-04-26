@@ -57,6 +57,7 @@ tasks.dokkaHtml.configure {
     dokkaSourceSets {
         named("main") {
             skipDeprecated.set(true)
+            includeNonPublic.set(true)
         }
     }
 }

@@ -5,22 +5,26 @@ import com.modejota.playlistmaker.models.Song
 /**
  * Singleton class to share data between fragments in the playlist management
  * activity and receive data from the MainActivity.
+ * @author José Alberto Gómez García    -   @modejota
  */
 object SharedData {
 
     /**
      * Path to the playlist file (if user clicked on a playlist to edit it, empty otherwise).
+     * @property playlistPath
      */
     private var playlistPath: String = ""
 
     /**
      * List of IDs of the songs confirmed by the user to be shown in selected fragment.
      * If user clicked on a playlist to edit it, also contains the IDs of the songs already in the playlist.
+     * @property songsID
      */
     private var songsID = mutableListOf<Long>()
 
     /**
      * List of songs retrieved from the device internal storage.
+     * @property allSongs
      */
     private var allSongs = mutableListOf<Song>()
 

@@ -11,11 +11,14 @@ import com.modejota.playlistmaker.databinding.ActivityPlaylistManagementBinding
 
 /**
  * Class to represent the Playlist Management, where fragments with those functionality will be held.
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class PlaylistManagementActivity : AppCompatActivity() {
 
     /**
      * ViewBinding object to be used in the activity.
+     * @property binding
      */
     private lateinit var binding: ActivityPlaylistManagementBinding
 

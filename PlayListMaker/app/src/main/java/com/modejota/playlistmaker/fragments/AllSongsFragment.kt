@@ -16,26 +16,32 @@ import com.modejota.playlistmaker.databinding.FragmentAllSongsBinding
 /**
  * Fragment to display all songs in the device's storage.
  * It implements interface to handle the click on a song.
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class AllSongsFragment : Fragment(), SongAdapter.OnItemClickListener {
 
     /**
      * ViewBinding object for the fragment
+     * @property binding
      */
     private var _binding: FragmentAllSongsBinding? = null
 
     /**
      * ViewBinding object's getter for the fragment
+     * @property binding
      */
     private val binding get() = _binding!!
 
     /**
      * Reference to the upper ActionMenu in the toolbar
+     * @property actionMenu
      */
     private var actionMenu: Menu? = null
 
     /**
      * List of selected songs' IDs (to be deleted or added to the playlist in the next step)
+     * @property selectedIndexes
      */
     private val selectedIndexes = mutableListOf<Long>()
 

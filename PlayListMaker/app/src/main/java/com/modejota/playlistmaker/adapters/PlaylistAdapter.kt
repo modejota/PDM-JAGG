@@ -14,6 +14,8 @@ import com.modejota.playlistmaker.models.Playlist
  * @property playlistList   List of playlists data
  * @property isClickedList  List of booleans to keep track of clicked playlists
  * @property listener       Listener for click and long-click events
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class PlaylistAdapter(
     private val playlistList: MutableList<Playlist>,
@@ -23,6 +25,7 @@ class PlaylistAdapter(
 
     /**
      * Variable to indicate if the playlist can be clicked
+     * @property isClickable
      */
     private var isClickable = true
 

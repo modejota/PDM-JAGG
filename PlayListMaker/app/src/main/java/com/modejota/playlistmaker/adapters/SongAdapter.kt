@@ -18,6 +18,8 @@ import java.util.*
  * @property songList    List of songs
  * @property isClickedList   List of booleans to keep track of which songs are clicke
  * @property listener   Listener for click event
+ *
+ * @author José Alberto Gómez García    -   @modejota
  */
 class SongAdapter(
     private val songList: MutableList<Song>,
