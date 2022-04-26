@@ -2,6 +2,7 @@
 .gradle
 /local.properties
 /.idea
+/docs/dokka
 .DS_Store
 /build
 /captures
