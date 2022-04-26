@@ -1,45 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1315" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/activity_playlist_management.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/dialog_playlist_title.xml" value="0.20925925925925926" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/fragment_all_songs.xml" value="0.1" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/fragment_selected_songs.xml" value="0.1" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/item_playlist.xml" value="0.4" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/item_song.xml" value="0.3905249679897567" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_all.xml" value="0.1" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_delete.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/action_bar_delete_playlist.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/menu/bottom_menu.xml" value="0.2222222222222222" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1315" />
-        <entry key="..\:/Users/Mode/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1315" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/drawable/ic_baseline_delete.xml" value="0.3465" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/drawable/ic_baseline_delete_red.xml" value="0.3375" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/activity_main.xml" value="0.34479166666666666" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/activity_playlist_management.xml" value="0.34479166666666666" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/dialog_playlist_title.xml" value="0.34479166666666666" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/fragment_all_songs.xml" value="0.2848731884057971" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/fragment_selected_songs.xml" value="0.2848731884057971" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/item_playlist.xml" value="0.34479166666666666" />
-        <entry key="..\:/Users/modejota/Desktop/PDM-JAGG/PlaylistMaker/app/src/main/res/layout/item_song.xml" value="0.22418478260869565" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.4" />
-      </ProjectState>
-    </option>
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
