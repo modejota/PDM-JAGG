@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), PlaylistAdapter.OnItemClickListener {
             initRecyclerView()  // Re-initialize the view to keep consistency
             Toast.makeText(this, getString(R.string.confirm_playlist_deleted), Toast.LENGTH_SHORT).show()
         }
-        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> }
+        alertDialog.setNegativeButton(getString(R.string.negative)) { _, _ -> initRecyclerView() }
         alertDialog.show()
     }
 
