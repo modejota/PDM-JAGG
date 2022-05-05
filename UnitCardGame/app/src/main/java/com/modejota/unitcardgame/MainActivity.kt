@@ -88,7 +88,10 @@ class MainActivity : AppCompatActivity(), WifiP2pManager.ChannelListener {
                         Toast.LENGTH_SHORT).show()
                 }
             })
+        }
 
+        binding.cancelConnectionButton.setOnClickListener {
+            disconnect()
         }
     }
 
@@ -142,6 +145,18 @@ class MainActivity : AppCompatActivity(), WifiP2pManager.ChannelListener {
             }
             override fun onFailure(reason: Int) {
                 Toast.makeText(this@MainActivity, "Failed to connect to ${device.deviceName}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun disconnect(){
+        manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
+            override fun onSuccess() {
+                Toast.makeText(this@MainActivity, "Disconnected", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(reason: Int) {
+                Toast.makeText(this@MainActivity, "Failed to disconnect", Toast.LENGTH_SHORT).show()
             }
         })
     }
