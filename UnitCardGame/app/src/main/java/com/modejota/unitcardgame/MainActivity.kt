@@ -14,25 +14,30 @@ import androidx.appcompat.app.AlertDialog
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.qrcode.QRCodeWriter
+import com.modejota.unitcardgame.clientstuff.Jugador
 import com.modejota.unitcardgame.databinding.ActivityMainBinding
+import com.modejota.unitcardgame.serverstuff.ServidorUno
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var iAmServer = false
+    private var jugador: Jugador? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Toast.makeText(this, getDeviceName(), Toast.LENGTH_SHORT).show()
-
         binding.createPartyButton.setOnClickListener {
             val qrCode = getQrCodeBitmap(getIpAddress())
-            ShowQrDialog(qrCode).show(supportFragmentManager, "QR_DIALOG")
             iAmServer = true
+            ShowQrDialog(qrCode, onSubmitClickListener = {
+                //Toast.makeText(this, "GAME SHOULD NOW START", Toast.LENGTH_SHORT).show()
+                jugador = Jugador(getIpAddress(), this)
+                jugador!!.crearPartida(2)
+            }).show(supportFragmentManager, "QR_DIALOG")
         }
 
         binding.joinPartyButton.setOnClickListener {
@@ -50,20 +55,19 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this, "Scan cancelled", Toast.LENGTH_SHORT).show()
-            } else {
+            if (result.contents != null) {
                 // Create a dialog with a button to join the party.
                 val dialog = AlertDialog.Builder(this)
                 dialog.setTitle("Join party")
                 dialog.setMessage("Do you want to join the party?")
                 dialog.setPositiveButton("Yes") { _, _ ->
-                    // Join the party.
-                    Toast.makeText(this, "Joined the party", Toast.LENGTH_SHORT).show()
+                    // Join the party
+                    jugador = Jugador(getIPAddressFromQRCode(result.contents),this)
+                    jugador!!.unirseAPartida()
+
                 }
                 dialog.setNegativeButton("No") { _, _ ->
-                    // Cancel the join request.
-                    Toast.makeText(this, "Cancelled the join request", Toast.LENGTH_SHORT).show()
+                    // Cancel the join request. No need to do nothing.
                 }
                 dialog.show()
             }
@@ -93,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             for (address in link.linkAddresses) {
                 if (address.address is java.net.Inet4Address) {
                     // Check this further
-                    Toast.makeText(this, address.address.hostAddress, Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, address.address.hostAddress, Toast.LENGTH_SHORT).show()
                     return address.address.toString().dropLast(3)
                 }
                 //return link.linkAddresses[1].toString().dropLast(3) // Primero viene la IPv6, luego la IPv4. Quitamos la máscara.
@@ -101,6 +105,9 @@ class MainActivity : AppCompatActivity() {
         }
         return ""
     }
+
+    private fun getIPAddressFromQRCode(text: String): String = text.split(",")[1].split(":")[1]
+
 
     // Podría usarse para obtener el nombre del dispositivo y mostrarlo en el dialogo de confiramación.
     private fun getDeviceName(): String {

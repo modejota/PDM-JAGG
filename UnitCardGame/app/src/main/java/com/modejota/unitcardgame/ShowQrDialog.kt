@@ -6,11 +6,13 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.modejota.unitcardgame.databinding.ShowQrdialogBinding
 
-class ShowQrDialog(private val image: Bitmap) : DialogFragment() {
+class ShowQrDialog(
+    private val image: Bitmap,
+    private val onSubmitClickListener: (Unit) -> Unit
+) : DialogFragment() {
 
     private lateinit var binding : ShowQrdialogBinding
 
@@ -20,8 +22,7 @@ class ShowQrDialog(private val image: Bitmap) : DialogFragment() {
         builder.setView(binding.root)
 
         binding.initiateGameButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Initiate Game", Toast.LENGTH_SHORT).show()
-            // TODO: Actual game initiation
+            onSubmitClickListener.invoke(Unit)
             dismiss()
         }
         binding.qrcode.setImageBitmap(image)
