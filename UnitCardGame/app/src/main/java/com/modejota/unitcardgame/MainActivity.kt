@@ -6,17 +6,14 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.LinkProperties
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.qrcode.QRCodeWriter
 import com.modejota.unitcardgame.clientstuff.Jugador
 import com.modejota.unitcardgame.databinding.ActivityMainBinding
-import com.modejota.unitcardgame.serverstuff.ServidorUno
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -34,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             val qrCode = getQrCodeBitmap(getIpAddress())
             iAmServer = true
             ShowQrDialog(qrCode, onSubmitClickListener = {
-                //Toast.makeText(this, "GAME SHOULD NOW START", Toast.LENGTH_SHORT).show()
                 jugador = Jugador(getIpAddress(), this)
                 jugador!!.crearPartida(2)
             }).show(supportFragmentManager, "QR_DIALOG")
@@ -61,10 +57,8 @@ class MainActivity : AppCompatActivity() {
                 dialog.setTitle("Join party")
                 dialog.setMessage("Do you want to join the party?")
                 dialog.setPositiveButton("Yes") { _, _ ->
-                    // Join the party
                     jugador = Jugador(getIPAddressFromQRCode(result.contents),this)
                     jugador!!.unirseAPartida()
-
                 }
                 dialog.setNegativeButton("No") { _, _ ->
                     // Cancel the join request. No need to do nothing.
@@ -110,6 +104,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // Podría usarse para obtener el nombre del dispositivo y mostrarlo en el dialogo de confiramación.
+    /*
     private fun getDeviceName(): String {
         val manufacturer = Build.MANUFACTURER
         val model = Build.MODEL
@@ -119,4 +114,5 @@ class MainActivity : AppCompatActivity() {
             manufacturer
         }
     }
+    */
 }

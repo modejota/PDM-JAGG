@@ -3,7 +3,6 @@ package com.modejota.unitcardgame.clientstuff
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import com.modejota.unitcardgame.model.Card
 import com.modejota.unitcardgame.serverstuff.ServidorUno
@@ -23,8 +22,9 @@ class Jugador(
     private var jugador: Socket? = null
 
     fun crearPartida(cantidadJugadores: Int) {
+        val handler = Handler(Looper.getMainLooper())
         try {
-            val servidor = ServidorUno(cantidadJugadores)
+            val servidor = ServidorUno(cantidadJugadores, context)
             servidor.start()
 
             jugador = Socket(serverIP, 9029)
@@ -33,7 +33,9 @@ class Jugador(
 
             ThreadJugador(this, jugador!!, entrada!!).start()
 
-            Log.d("Jugador", "Partida creada con éxito")
+            handler.post {
+                Toast.makeText(context, "Partida creada", Toast.LENGTH_SHORT).show()
+            }
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -41,6 +43,7 @@ class Jugador(
     }
 
     fun unirseAPartida() {
+        val handler = Handler(Looper.getMainLooper())
         try {
             jugador = Socket(serverIP, 9029)
             entrada = DataInputStream(jugador?.getInputStream())
@@ -48,8 +51,9 @@ class Jugador(
 
             ThreadJugador(this, jugador!!, entrada!!).start()
 
-            Log.d("Jugador", "Jugador unido a partida con éxito")
-
+            handler.post {
+                Toast.makeText(context, "Unido a partida", Toast.LENGTH_SHORT).show()
+            }
 
         } catch (e: Exception) {
             e.printStackTrace()

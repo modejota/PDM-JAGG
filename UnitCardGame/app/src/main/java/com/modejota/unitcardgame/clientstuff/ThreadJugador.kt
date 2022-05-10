@@ -1,7 +1,6 @@
 package com.modejota.unitcardgame.clientstuff
 
 import java.io.DataInputStream
-import java.io.ObjectInputStream
 import java.net.Socket
 
 class ThreadJugador(
@@ -16,7 +15,7 @@ class ThreadJugador(
                 when (entrada.readInt()) {
                     1 -> {
                         // Soy quien juega
-                        var recibeObjeto = ObjectInputStream(cliente.getInputStream())
+                        // var recibeObjeto = ObjectInputStream(cliente.getInputStream())
                         // Actualizar mis cartas y actualizar carta actual jugada
                     }
                     2 -> {

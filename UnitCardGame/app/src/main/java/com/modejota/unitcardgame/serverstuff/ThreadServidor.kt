@@ -22,7 +22,7 @@ class ThreadServidor(
         try {
             entrada = DataInputStream(cliente.getInputStream())
             salida = DataOutputStream(cliente.getOutputStream())
-            val recibeObjeto = ObjectInputStream(entrada)
+            // val recibeObjeto = ObjectInputStream(entrada)
             // jugador = recibeObjeto.readObject() as Jugador
             // servidor.getPartida().addJugador(jugador)
         } catch (e: Exception) {
