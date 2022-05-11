@@ -1,4 +1,4 @@
-package com.modejota.unitcardgame
+package com.modejota.unitcardgame.otherstuff
 
 import android.app.AlertDialog
 import android.app.Dialog

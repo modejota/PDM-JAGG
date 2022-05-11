@@ -60,4 +60,7 @@ class Jugador(
         }
     }
 
+    fun aniadirCarta(carta: Card) {
+        cartas.add(carta)
+    }
 }

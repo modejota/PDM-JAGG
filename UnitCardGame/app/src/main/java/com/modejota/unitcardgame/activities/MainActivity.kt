@@ -1,4 +1,4 @@
-package com.modejota.unitcardgame
+package com.modejota.unitcardgame.activities
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.qrcode.QRCodeWriter
+import com.modejota.unitcardgame.otherstuff.ShowQrDialog
 import com.modejota.unitcardgame.clientstuff.Jugador
 import com.modejota.unitcardgame.databinding.ActivityMainBinding
 
@@ -19,7 +20,6 @@ import com.modejota.unitcardgame.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var iAmServer = false
     private var jugador: Jugador? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.createPartyButton.setOnClickListener {
             val qrCode = getQrCodeBitmap(getIpAddress())
-            iAmServer = true
             ShowQrDialog(qrCode, onSubmitClickListener = {
                 jugador = Jugador(getIpAddress(), this)
                 jugador!!.crearPartida(2)
+
+                val intent = Intent(this, GameActivity::class.java)
+                startActivity(intent)
+
             }).show(supportFragmentManager, "QR_DIALOG")
         }
 
@@ -59,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                 dialog.setPositiveButton("Yes") { _, _ ->
                     jugador = Jugador(getIPAddressFromQRCode(result.contents),this)
                     jugador!!.unirseAPartida()
+
+                    val intent = Intent(this, GameActivity::class.java)
+                    startActivity(intent)
+
                 }
                 dialog.setNegativeButton("No") { _, _ ->
                     // Cancel the join request. No need to do nothing.

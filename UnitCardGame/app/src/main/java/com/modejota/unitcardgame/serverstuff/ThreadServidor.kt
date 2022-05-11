@@ -16,7 +16,7 @@ class ThreadServidor(
 
     private var entrada: DataInputStream? = null
     private var salida: DataOutputStream? = null
-    private var servidoresEscucha: ArrayList<ThreadServidor>? = null
+    private var servidoresEscucha = ArrayList<ThreadServidor>()
 
     override fun run() {
         try {
@@ -34,6 +34,8 @@ class ThreadServidor(
         }
 
     }
+
+    fun anniadeServidorEscucha(servidor: ThreadServidor) = servidoresEscucha.add(servidor)
 
     // Aquí faltan muchísimos métodos sobre como actualizar los datos.
 }

@@ -1,9 +1,10 @@
-package com.modejota.unitcardgame
+package com.modejota.unitcardgame.otherstuff
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.modejota.unitcardgame.R
 import com.modejota.unitcardgame.databinding.ItemCardBinding
 import com.modejota.unitcardgame.model.Card
 
@@ -29,7 +30,7 @@ class CardAdapter(
         private val binding = ItemCardBinding.bind(view)
 
         fun render(card: Card) {
-            binding.textView.text = "PLACEHOLDER"
+            binding.imageCarta.setImageResource(R.drawable.carta_wildcards)
         }
     }
 
