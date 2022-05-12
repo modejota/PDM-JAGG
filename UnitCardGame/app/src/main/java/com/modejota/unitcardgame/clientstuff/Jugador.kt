@@ -3,6 +3,7 @@ package com.modejota.unitcardgame.clientstuff
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import com.modejota.unitcardgame.model.Card
 import com.modejota.unitcardgame.serverstuff.ServidorUno
@@ -25,6 +26,7 @@ class Jugador(
     fun crearPartida(cantidadJugadores: Int) {
         val handler = Handler(Looper.getMainLooper())
         try {
+
             val servidor = ServidorUno(cantidadJugadores, context)
             servidor.start()
 
@@ -39,7 +41,7 @@ class Jugador(
             }
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("Conexion", "Servidor incapaz de crear partida")
         }
     }
 
@@ -57,7 +59,7 @@ class Jugador(
             }
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("Conexion", "Cliente incapaz de unirse a partida")
         }
     }
 
@@ -66,4 +68,5 @@ class Jugador(
     }
 
     fun getServerIP() = serverIP
+    fun getSocket() = jugador
 }

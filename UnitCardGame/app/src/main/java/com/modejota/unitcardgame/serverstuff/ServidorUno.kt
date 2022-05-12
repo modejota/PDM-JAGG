@@ -39,6 +39,7 @@ class ServidorUno(
                 val usuario = ThreadServidor(sockets[sockets.size-1], this, jugador, numeroJugadores-1)
                 servidores.add(usuario)
                 servidores[servidores.size-1].start()
+                //Toast.makeText(context, "Jugador $jugador conectado", Toast.LENGTH_SHORT).show()
             }
             // Una vez todos los jugadores han sido añadidos, se pueden establecer los "listener"
 

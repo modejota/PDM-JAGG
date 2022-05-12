@@ -6,9 +6,13 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.LinkProperties
+import android.net.wifi.WifiManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.Formatter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.getSystemService
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.qrcode.QRCodeWriter
@@ -27,15 +31,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Hay que asegurarse de que haya conexión WIFI. -> Si me da tiempo, botón para activar o redirigir.
+        // Si no, devuelve una IP 0.0.0.0 de tapadillo, no levanta error.
+        // RECORDATORIO: no lo puedo probar entre emulador y dispositivo, porque son subredes diferentes.
+
         binding.createPartyButton.setOnClickListener {
-            val qrCode = getQrCodeBitmap(getIpAddress())
+            val qrCode = getQrCodeBitmap(getIpAddress()!!)
             ShowQrDialog(qrCode, onSubmitClickListener = {
-                jugador = Jugador(getIpAddress(), this)
-                jugador!!.crearPartida(2)
 
                 val intent = Intent(this, GameActivity::class.java)
-                //intent.putExtra("PLAYER", jugador)
-                // -> Si no puedo serializar el socket, ¿como paso la conexión a la siguiente actividad?
+                intent.putExtra("IP", getIpAddress())
+                intent.putExtra("AM_I_SERVER", true)
+
                 startActivity(intent)
 
             }).show(supportFragmentManager, "QR_DIALOG")
@@ -62,10 +69,11 @@ class MainActivity : AppCompatActivity() {
                 dialog.setTitle("Join party")
                 dialog.setMessage("Do you want to join the party?")
                 dialog.setPositiveButton("Yes") { _, _ ->
-                    jugador = Jugador(getIPAddressFromQRCode(result.contents),this)
-                    jugador!!.unirseAPartida()
 
                     val intent = Intent(this, GameActivity::class.java)
+                    intent.putExtra("IP", getIPAddressFromQRCode(result.contents))
+                    intent.putExtra("AM_I_SERVER", false)
+
                     startActivity(intent)
 
                 }
@@ -92,27 +100,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getIpAddress(): String {
+    private fun getIpAddress(): String? {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE)
         if (connectivityManager is ConnectivityManager) {
             val link: LinkProperties =
                 connectivityManager.getLinkProperties(connectivityManager.activeNetwork) as LinkProperties
             for (address in link.linkAddresses) {
                 if (address.address is java.net.Inet4Address) {
-                    // Check this further
-                    //Toast.makeText(this, address.address.hostAddress, Toast.LENGTH_SHORT).show()
-                    return address.address.toString().dropLast(3)
+                    // Return the first IPv4 address found.
+                    return address.address.hostAddress
                 }
-                //return link.linkAddresses[1].toString().dropLast(3) // Primero viene la IPv6, luego la IPv4. Quitamos la máscara.
             }
         }
         return ""
     }
 
-    private fun getIPAddressFromQRCode(text: String): String = text.split(",")[1].split(":")[1]
+    private fun getIPAddressFromQRCode(text: String): String = text.split(",")[0].split(":")[1]
 
 
     // Podría usarse para obtener el nombre del dispositivo y mostrarlo en el dialogo de confiramación.
+    // Implementar si me da tiempo, hay que tener ojo porque cada fabricante rellena esto como quiere.
     /*
     private fun getDeviceName(): String {
         val manufacturer = Build.MANUFACTURER
