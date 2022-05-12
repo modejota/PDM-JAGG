@@ -8,12 +8,13 @@ import com.modejota.unitcardgame.model.Card
 import com.modejota.unitcardgame.serverstuff.ServidorUno
 import java.io.DataInputStream
 import java.io.DataOutputStream
+import java.io.Serializable
 import java.net.Socket
 
 class Jugador(
     private val serverIP : String,
     private val context: Context
-) {
+): Serializable {
 
     private val cartas = ArrayList<Card>()
     //Puede que necesite una serie de booleanos para controlar cosas
@@ -63,4 +64,6 @@ class Jugador(
     fun aniadirCarta(carta: Card) {
         cartas.add(carta)
     }
+
+    fun getServerIP() = serverIP
 }

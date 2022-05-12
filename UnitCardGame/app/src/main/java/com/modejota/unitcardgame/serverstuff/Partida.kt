@@ -3,11 +3,12 @@ package com.modejota.unitcardgame.serverstuff
 import com.modejota.unitcardgame.clientstuff.Jugador
 import com.modejota.unitcardgame.model.Card
 import com.modejota.unitcardgame.model.CardType
+import java.io.Serializable
 import kotlin.math.abs
 
 class Partida(
     private val servidorJuego: ServidorUno
-) {
+): Serializable {
 
     private var mazo: ArrayList<Card> = ArrayList()
     private var descarte: ArrayList<Card> = ArrayList()

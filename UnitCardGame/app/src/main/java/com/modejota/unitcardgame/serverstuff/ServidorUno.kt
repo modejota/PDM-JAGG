@@ -4,13 +4,14 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import java.io.Serializable
 import java.net.ServerSocket
 import java.net.Socket
 
 class ServidorUno(
     private var numeroJugadores: Int,
     private var context: Context    // En previsión de que sea necesario para actualizar la interfaz
-): Thread() {
+): Thread(), Serializable {
 
     private val sockets = ArrayList<Socket>()
     private val servidores = ArrayList<ThreadServidor>()

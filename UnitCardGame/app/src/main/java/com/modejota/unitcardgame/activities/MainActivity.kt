@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 jugador!!.crearPartida(2)
 
                 val intent = Intent(this, GameActivity::class.java)
+                //intent.putExtra("PLAYER", jugador)
+                // -> Si no puedo serializar el socket, ¿como paso la conexión a la siguiente actividad?
                 startActivity(intent)
 
             }).show(supportFragmentManager, "QR_DIALOG")

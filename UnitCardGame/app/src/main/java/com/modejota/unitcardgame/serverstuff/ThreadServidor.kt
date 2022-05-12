@@ -3,6 +3,7 @@ package com.modejota.unitcardgame.serverstuff
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.ObjectInputStream
+import java.io.Serializable
 import java.net.Socket
 
 // Por ahora, todo public var, ya veré que puede ser privado y que no.
@@ -12,7 +13,7 @@ class ThreadServidor(
     var servidor: ServidorUno,
     var playerID: Int,
     var numeroOponentes: Int,
-): Thread() {
+): Thread(), Serializable {
 
     private var entrada: DataInputStream? = null
     private var salida: DataOutputStream? = null
