@@ -1,9 +1,8 @@
 package com.modejota.unitcardgame.model
 
-import java.io.Serializable
-
 data class Card(
     val number: Int,
     val color: String,
-    val type: CardType
-): Serializable
+    val type: CardType,
+    val imageName: String
+)

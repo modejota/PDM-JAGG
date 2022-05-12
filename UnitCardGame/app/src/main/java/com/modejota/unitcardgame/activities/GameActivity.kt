@@ -1,25 +1,23 @@
 package com.modejota.unitcardgame.activities
 
 import android.os.Bundle
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
+import android.provider.Telephony
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modejota.unitcardgame.databinding.ActivityGameBinding
+import com.modejota.unitcardgame.clientstuff.Client
 import com.modejota.unitcardgame.model.Card
-import com.modejota.unitcardgame.model.CardType
+import com.modejota.unitcardgame.model.Partida
 import com.modejota.unitcardgame.otherstuff.CardAdapter
-import java.io.DataInputStream
-import java.io.DataOutputStream
-import java.lang.Thread.sleep
-import java.net.ServerSocket
-import java.net.Socket
+import com.modejota.unitcardgame.serverstuff.Server
 
 
 class GameActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameBinding
+    private var client: Client?= null
+    private var server: Server?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,32 +25,40 @@ class GameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Temporal, las conexiones deben realizarse en hebra secundaria.
-        val policy = ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
+        //val policy = ThreadPolicy.Builder().permitAll().build()
+        //StrictMode.setThreadPolicy(policy)
 
         val ip = intent.getStringExtra("IP")
         Toast.makeText(this, "IP RECIBIDA: $ip", Toast.LENGTH_LONG).show()
         val amIServer = intent.getBooleanExtra("AM_I_SERVER", false)
         if (amIServer) {
-            val serverSocket = ServerSocket(9029)
-            val socket = serverSocket.accept()
-            sleep(2000)
-            val din = DataInputStream(socket.getInputStream())
-            val message = din.readUTF()
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
-        } else {
-            // Aqui habría que poner un cartelito diciendo "Espere a que se conecte el servidor"
-            val socket = Socket(ip, 9029)
-            val dout = DataOutputStream(socket.getOutputStream())
-            dout.writeUTF("HOLA ME HE ENVIADO ALGO")
-            dout.flush()
-            Toast.makeText(this, "CLIENTE CONECTADO", Toast.LENGTH_LONG).show()
+            // Create a thread to run the server on.
+            val serverThread = Thread {
+                server = Server(2)
+                server!!.startServer()
+            }
+
+            Toast.makeText(this, "SERVIDOR", Toast.LENGTH_LONG).show()
+            // Una dificultad que me estoy viendo venir, es sincronizar la interfaz con esto.
+            // Los sockets no me generar un callback con el que pueda actualizar la interfaz.
+        }
+        // Aqui habría que poner un cartelito diciendo "Espere a que se conecte el servidor"
+        // Create a thread to run the client on. (Se supone que el servidor también es cliente)
+        val clientThread = Thread {
+            client = Client(ip!!)
         }
 
+
+
+        //Toast.makeText(this, client?.getCartas()?.size ?: 0, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "CLIENTE CONECTADO", Toast.LENGTH_LONG).show()
+
         binding.rvMyCards.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvMyCards.adapter = CardAdapter(Partida().getInitCards())
 
         // Arraylist de prueba, ya veré como consigo esto a partir del servidor
+        /*
         val mazo = ArrayList<Card>()
         for (i in 0..2) {
             mazo.add(Card(i % 2, "BLUE", CardType.NUMBER))
@@ -63,5 +69,6 @@ class GameActivity : AppCompatActivity() {
 
         binding.rvMyCards.adapter = CardAdapter(mazo)
 
+         */
     }
 }

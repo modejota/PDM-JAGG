@@ -6,25 +6,19 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.LinkProperties
-import android.net.wifi.WifiManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.Formatter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.getSystemService
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.qrcode.QRCodeWriter
 import com.modejota.unitcardgame.otherstuff.ShowQrDialog
-import com.modejota.unitcardgame.clientstuff.Jugador
 import com.modejota.unitcardgame.databinding.ActivityMainBinding
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var jugador: Jugador? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
