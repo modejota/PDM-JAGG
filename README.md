@@ -1,6 +1,8 @@
-# PDM-JAGG
-Repositorio para la asignatura "Programación de dispositivos móviles". 
-ETSIIT UGR. Curso 21/22.
+# Programación de Dispositivos Móviles
+
+Proyecto para la asignatura "Programación de Dispositivos Móviles" del Grado en Ingeniería Informática de la UGR.
+
+Realizado por *José Alberto Gómez García* durante el curso 21-22
 
 ## Primera aplicación - Playlist Maker
 ---
